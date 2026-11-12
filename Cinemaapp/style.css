@@ -1,7 +1,4 @@
-/* =========================================================
-   Cinema App - isang CSS para sa lahat ng pages
-   (index, register, dashboard, user management)
-   ========================================================= */
+
 
 :root {
     --bg: #0f0f12;
@@ -14,8 +11,6 @@
     --red-dark: #b20710;
     --gold: #ffcc00;
     --ok: #3ddc84;
-
-    /* smooth easing + timing */
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
     --fast: 0.2s;
     --med: 0.45s;
@@ -46,8 +41,6 @@ body {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
-
-/* ---------- Typography ---------- */
 h1, h2, h3 {
     text-align: center;
     margin: 10px 0;
@@ -77,7 +70,6 @@ a:hover {
     color: #fff;
 }
 
-/* ---------- Entrance animation (isang sequence lang) ---------- */
 @keyframes riseIn {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -95,7 +87,6 @@ table {
     animation: riseIn var(--med) var(--ease) both;
 }
 
-/* staggered: sunod-sunod ang labas */
 nav            { animation-delay: 0s; }
 body > h1      { animation-delay: 0.05s; }
 header         { animation-delay: 0.08s; }
@@ -105,7 +96,6 @@ form           { animation-delay: 0.2s; }
 body > h3      { animation-delay: 0.22s; }
 table          { animation-delay: 0.26s; }
 
-/* ---------- Navigation ---------- */
 nav {
     display: flex;
     flex-wrap: wrap;
@@ -133,7 +123,6 @@ nav a:hover {
     background: var(--surface-2);
 }
 
-/* pulang guhit na lumalawak sa ilalim ng link */
 nav a::after {
     content: "";
     position: absolute;
@@ -151,7 +140,6 @@ nav a:hover::after {
     width: 40%;
 }
 
-/* ---------- Forms (login at register) ---------- */
 form {
     max-width: 400px;
     margin: 25px auto;
@@ -164,7 +152,6 @@ form {
     overflow: hidden;
 }
 
-/* projector light: ang tanging "memorable" na galaw, mabagal at tahimik */
 form::before {
     content: "";
     position: absolute;
@@ -188,7 +175,6 @@ form::before {
     50%      { left: 90%; }
 }
 
-/* Itinatago ang <br> sa loob ng form, margin na ang bahala */
 form br {
     display: none;
 }
@@ -201,7 +187,6 @@ label {
     transition: color var(--fast) ease;
 }
 
-/* ang label ay nagiging pula kapag naka-focus ang input sa ilalim nito */
 label:has(+ input:focus) {
     color: var(--text);
 }
@@ -238,7 +223,6 @@ input:focus {
     box-shadow: 0 0 0 4px rgba(229, 9, 20, 0.18);
 }
 
-/* ---------- Buttons ---------- */
 button,
 input[type="submit"] {
     position: relative;
@@ -271,7 +255,6 @@ input[type="submit"]:active {
     box-shadow: none;
 }
 
-/* kintab na dumadaan kapag hinover */
 button::after,
 input[type="submit"]::after {
     content: "";
@@ -291,7 +274,6 @@ input[type="submit"]:hover::after {
     left: 130%;
 }
 
-/* ---------- Dashboard ---------- */
 header {
     background: var(--surface);
     border: 1px solid var(--line);
@@ -303,7 +285,6 @@ header {
 header h1 { margin: 5px 0; }
 header h2 { margin: 5px 0 6px; }
 
-/* Stat cards: ilagay ang tatlong <div> sa loob ng <div class="stats"> */
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -340,7 +321,6 @@ header h2 { margin: 5px 0 6px; }
     color: #fff;
 }
 
-/* ---------- Tables ---------- */
 table {
     width: 100%;
     border-collapse: separate;
@@ -375,7 +355,6 @@ tbody tr:hover td {
     background: var(--surface-2);
 }
 
-/* mga row ay isa-isang lumalabas */
 tbody tr {
     animation: riseIn var(--med) var(--ease) both;
 }
@@ -390,7 +369,6 @@ tbody tr:nth-child(7)  { animation-delay: 0.60s; }
 tbody tr:nth-child(8)  { animation-delay: 0.65s; }
 tbody tr:nth-child(n+9) { animation-delay: 0.70s; }
 
-/* Poster: lumalaki nang bahagya kapag hinover */
 td img {
     display: block;
     border-radius: 6px;
@@ -402,14 +380,12 @@ td img:hover {
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
 }
 
-/* Buttons sa loob ng table (Approve / Disable) ay hindi full-width */
 td button {
     width: auto;
     padding: 8px 16px;
     font-size: 14px;
 }
 
-/* ---------- Mobile ---------- */
 @media (max-width: 700px) {
     body {
         padding: 14px;
@@ -422,7 +398,6 @@ td button {
     }
 }
 
-/* ---------- Accessibility ---------- */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
@@ -430,7 +405,6 @@ input:focus-visible {
     outline-offset: 2px;
 }
 
-/* Kung naka-reduce motion ang user sa device nila, patayin ang galaw */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation: none !important;
