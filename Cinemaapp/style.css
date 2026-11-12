@@ -1,0 +1,440 @@
+/* =========================================================
+   Cinema App - isang CSS para sa lahat ng pages
+   (index, register, dashboard, user management)
+   ========================================================= */
+
+:root {
+    --bg: #0f0f12;
+    --surface: #1a1a20;
+    --surface-2: #23232b;
+    --line: #2f2f38;
+    --text: #f2f2f4;
+    --muted: #9a9aa6;
+    --red: #e50914;
+    --red-dark: #b20710;
+    --gold: #ffcc00;
+    --ok: #3ddc84;
+
+    /* smooth easing + timing */
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --fast: 0.2s;
+    --med: 0.45s;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 24px;
+    min-height: 100vh;
+    font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    line-height: 1.5;
+    background:
+        radial-gradient(ellipse 60% 40% at 50% -10%, rgba(229, 9, 20, 0.18), transparent 70%),
+        var(--bg);
+    color: var(--text);
+    animation: pageIn 0.6s var(--ease) both;
+}
+
+@keyframes pageIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3 {
+    text-align: center;
+    margin: 10px 0;
+}
+
+h1 {
+    color: var(--red);
+    letter-spacing: 0.5px;
+}
+
+h2 {
+    font-weight: 400;
+    color: var(--muted);
+}
+
+p {
+    text-align: center;
+}
+
+a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: color var(--fast) ease;
+}
+
+a:hover {
+    color: #fff;
+}
+
+/* ---------- Entrance animation (isang sequence lang) ---------- */
+@keyframes riseIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+body > h1,
+body > h2,
+body > h3,
+body > p,
+nav,
+header,
+.stats,
+form,
+table {
+    animation: riseIn var(--med) var(--ease) both;
+}
+
+/* staggered: sunod-sunod ang labas */
+nav            { animation-delay: 0s; }
+body > h1      { animation-delay: 0.05s; }
+header         { animation-delay: 0.08s; }
+body > h2      { animation-delay: 0.12s; }
+.stats         { animation-delay: 0.16s; }
+form           { animation-delay: 0.2s; }
+body > h3      { animation-delay: 0.22s; }
+table          { animation-delay: 0.26s; }
+
+/* ---------- Navigation ---------- */
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin: 0 auto 22px;
+    padding: 8px;
+    max-width: 640px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+}
+
+nav a {
+    position: relative;
+    padding: 8px 18px;
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 14px;
+    transition: color var(--fast) ease, background var(--med) var(--ease);
+}
+
+nav a:hover {
+    color: #fff;
+    background: var(--surface-2);
+}
+
+/* pulang guhit na lumalawak sa ilalim ng link */
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 4px;
+    width: 0;
+    height: 2px;
+    background: var(--red);
+    border-radius: 2px;
+    transform: translateX(-50%);
+    transition: width var(--med) var(--ease);
+}
+
+nav a:hover::after {
+    width: 40%;
+}
+
+/* ---------- Forms (login at register) ---------- */
+form {
+    max-width: 400px;
+    margin: 25px auto;
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+    position: relative;
+    overflow: hidden;
+}
+
+/* projector light: ang tanging "memorable" na galaw, mabagal at tahimik */
+form::before {
+    content: "";
+    position: absolute;
+    top: -60%;
+    left: -40%;
+    width: 60%;
+    height: 220%;
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent
+    );
+    transform: rotate(8deg);
+    animation: beam 7s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes beam {
+    0%, 100% { left: -40%; }
+    50%      { left: 90%; }
+}
+
+/* Itinatago ang <br> sa loob ng form, margin na ang bahala */
+form br {
+    display: none;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: var(--muted);
+    transition: color var(--fast) ease;
+}
+
+/* ang label ay nagiging pula kapag naka-focus ang input sa ilalim nito */
+label:has(+ input:focus) {
+    color: var(--text);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 11px 12px;
+    margin-bottom: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-2);
+    color: #fff;
+    font-size: 15px;
+    transition:
+        border-color var(--fast) ease,
+        box-shadow var(--med) var(--ease),
+        background var(--fast) ease;
+}
+
+input::placeholder {
+    color: #6c6c78;
+}
+
+input:hover {
+    border-color: #444450;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--red);
+    background: #272730;
+    box-shadow: 0 0 0 4px rgba(229, 9, 20, 0.18);
+}
+
+/* ---------- Buttons ---------- */
+button,
+input[type="submit"] {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--red);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform var(--fast) var(--ease),
+        background var(--fast) ease,
+        box-shadow var(--med) var(--ease);
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: #f40612;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(229, 9, 20, 0.35);
+}
+
+button:active,
+input[type="submit"]:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: none;
+}
+
+/* kintab na dumadaan kapag hinover */
+button::after,
+input[type="submit"]::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s var(--ease);
+    pointer-events: none;
+}
+
+button:hover::after,
+input[type="submit"]:hover::after {
+    left: 130%;
+}
+
+/* ---------- Dashboard ---------- */
+header {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 18px 20px;
+    border-radius: 14px;
+    margin-bottom: 22px;
+}
+
+header h1 { margin: 5px 0; }
+header h2 { margin: 5px 0 6px; }
+
+/* Stat cards: ilagay ang tatlong <div> sa loob ng <div class="stats"> */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stats > div {
+    padding: 18px;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    transition:
+        transform var(--med) var(--ease),
+        border-color var(--med) ease,
+        box-shadow var(--med) var(--ease);
+}
+
+.stats > div:hover {
+    transform: translateY(-4px);
+    border-color: rgba(229, 9, 20, 0.6);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+.stats h2 {
+    margin: 0 0 4px;
+    font-size: 14px;
+}
+
+.stats h3 {
+    margin: 0;
+    font-size: 36px;
+    color: #fff;
+}
+
+/* ---------- Tables ---------- */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+}
+
+th {
+    background: var(--red);
+    color: #fff;
+    font-weight: 600;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+td {
+    transition: background var(--fast) ease;
+}
+
+tbody tr:hover td {
+    background: var(--surface-2);
+}
+
+/* mga row ay isa-isang lumalabas */
+tbody tr {
+    animation: riseIn var(--med) var(--ease) both;
+}
+
+tbody tr:nth-child(1)  { animation-delay: 0.30s; }
+tbody tr:nth-child(2)  { animation-delay: 0.35s; }
+tbody tr:nth-child(3)  { animation-delay: 0.40s; }
+tbody tr:nth-child(4)  { animation-delay: 0.45s; }
+tbody tr:nth-child(5)  { animation-delay: 0.50s; }
+tbody tr:nth-child(6)  { animation-delay: 0.55s; }
+tbody tr:nth-child(7)  { animation-delay: 0.60s; }
+tbody tr:nth-child(8)  { animation-delay: 0.65s; }
+tbody tr:nth-child(n+9) { animation-delay: 0.70s; }
+
+/* Poster: lumalaki nang bahagya kapag hinover */
+td img {
+    display: block;
+    border-radius: 6px;
+    transition: transform var(--med) var(--ease), box-shadow var(--med) var(--ease);
+}
+
+td img:hover {
+    transform: scale(1.12);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* Buttons sa loob ng table (Approve / Disable) ay hindi full-width */
+td button {
+    width: auto;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+    body {
+        padding: 14px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+/* ---------- Accessibility ---------- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+/* Kung naka-reduce motion ang user sa device nila, patayin ang galaw */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
